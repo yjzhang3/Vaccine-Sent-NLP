@@ -23,9 +23,9 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 
-def scraper_single(name,tweet_id,since_date,end_date):
+def scraper_single(name,tweet_id,since_date):
     replies=[]
-    for tweet in tweepy.Cursor(api.search,q='to:{}'.format(name), since_id = tweet_id, since=since_date, until=end_date, tweet_mode='extended').items(1000):
+    for tweet in tweepy.Cursor(api.search,q='to:{}'.format(name), since_id = tweet_id, since=since_date,tweet_mode='extended').items(2000):
         # search for any tweets that are more recent than this id, and then only within this time peirod 
         if hasattr(tweet, 'in_reply_to_status_id_str'):
             #print("has replies")
@@ -44,13 +44,13 @@ def scraper_single(name,tweet_id,since_date,end_date):
 
 def scraper_multiple(num_tweet):
     for j in range(num_tweet):
-        scraper_single(name[j],tweet_id[j],since_date[j],end_date[j])
+        scraper_single(name[j],tweet_id[j],since_date[j])
 
-name = ['@nytimes','@GavinNewsom']
-tweet_id = ['1398028759534551041','1400529612023558144']
-since_date = ['2021-05-27','2021-06-03']
+name = ['@nytimes','@GavinNewsom','CDCgov','thehill']
+tweet_id = ['1398028759534551041','1400529612023558144','1392911350058323973','1400225221135810567']
+since_date = ['2021-05-27','2021-06-03','2021-05-13','2021-06-02']
 end_date = ['2021-05-28','2021-06-03']
 
-scraper_multiple(len(name))
-
+#scraper_multiple(len(name))
+scraper_single(name[3],tweet_id[3],since_date[3])
         
