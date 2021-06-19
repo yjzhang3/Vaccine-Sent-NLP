@@ -1,6 +1,7 @@
 import csv
 import tweepy
 import ssl
+from datetime import datetime
 
 #https://stackoverflow.com/questions/52307443/how-to-get-the-replies-for-a-given-tweet-with-tweepy-and-python
 
@@ -20,12 +21,12 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 # Get access token
 # Construct the API
 auth.set_access_token(access_token, access_token_secret)
-api = tweepy.API(auth)
+api = tweepy.API(auth,wait_on_rate_limit=True) # this is to avoid 429 error for too frequent request
 
 
-def scraper_single(name,tweet_id,since_date):
+def scraper_single(name,tweet_id,since_date,end_date):
     replies=[]
-    for tweet in tweepy.Cursor(api.search,q='to:{}'.format(name), since_id = tweet_id, since=since_date,tweet_mode='extended').items(2000):
+    for tweet in tweepy.Cursor(api.search,q='to:{}'.format(name), since_id = tweet_id, since=since_date,end=end_date,tweet_mode='extended').items(10000):
         # search for any tweets that are more recent than this id, and then only within this time peirod 
         if hasattr(tweet, 'in_reply_to_status_id_str'):
             #print("has replies")
@@ -44,13 +45,15 @@ def scraper_single(name,tweet_id,since_date):
 
 def scraper_multiple(num_tweet):
     for j in range(num_tweet):
-        scraper_single(name[j],tweet_id[j],since_date[j])
+        scraper_single(name[j],tweet_id[j],since_date[j],end_date[j])
 
 name = ['@nytimes','@GavinNewsom','CDCgov','thehill']
 tweet_id = ['1398028759534551041','1400529612023558144','1392911350058323973','1400225221135810567']
 since_date = ['2021-05-27','2021-06-03','2021-05-13','2021-06-02']
-end_date = ['2021-05-28','2021-06-03']
+end_date = ['2021-05-28','2021-06-03','2021-05-14','2021-06-03']
 
 #scraper_multiple(len(name))
-scraper_single(name[3],tweet_id[3],since_date[3])
-        
+
+startTime = datetime.now()
+scraper_single(name[3],tweet_id[3],since_date[3],end_date[3])
+print(datetime.now()-startTime)
