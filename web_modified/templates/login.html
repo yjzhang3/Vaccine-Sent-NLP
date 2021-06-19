@@ -4,65 +4,32 @@
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <img src="https://github.com/anfederico/Flaskex/raw/master/media/flaskex-logo.png" alt="Flaskex">
-        <h6 href="/" class="subtitle"><strong>Basic Web</strong></h6>
+        <img src="https://static.thenounproject.com/png/1409678-200.png" alt="logo">
+        <h6 href="/" class="subtitle"><strong>NLP Vaccine Analysis</strong></h6>
       </a>
 
     </div>
     
   </nav>
 </section>
-<title>Basic Web</title>
-<section class="hero is-primary is-bold is-medium">
+<title>NLP Web App</title>
+<section class="hero is-primary is-bold is-halfheight">
   
-  <div class="hero-body">
+  <div class="hero-body" id="body_banner">
     
     <div class="container has-text-centered">
       <div>
-        <p class="subtitle is-4"><i>Sentiment Analysis of Vaccine Incentives</i></p>
-
+        <p class="subtitle is-4" id="head_title"><i>A web application that applies natural language processing analysis on COVID-19 vaccine incentives</i></p>
       <div>
+   
       <div class="columns">
-        <div class="column is-auto">
-
+        <div class="column is-auto" >
           <div class="dropdown" id="dropdown_1">
             <div class="dropdown-trigger">
               <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span>Dropdown button</span>
+                <span> States </span>
                 <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content">
-                <a href="#" class="dropdown-item">
-                  Dropdown item
-                </a>
-                <a class="dropdown-item">
-                  Other dropdown item
-                </a>
-                <a href="#" class="dropdown-item is-active">
-                  Active dropdown item
-                </a>
-                <a href="#" class="dropdown-item">
-                  Other dropdown item
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
-                  With a divider
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dropdown" id="dropdown_2">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span>Dropdown button</span>
-                <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </span>
               </button>
             </div>
@@ -70,31 +37,56 @@
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
               <div class="dropdown-content">
                 <a href="#" class="dropdown-item">
-                  Dropdown item
+                  California
                 </a>
                 <a class="dropdown-item">
-                  Other dropdown item
+                  Ohio
                 </a>
                 <a href="#" class="dropdown-item is-active">
-                  Active dropdown item
+                  Minnesota
                 </a>
                 <a href="#" class="dropdown-item">
-                  Other dropdown item
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
-                  With a divider
+                  West Virginia
                 </a>
               </div>
             </div>
           </div>
 
-          <br><br><br><br><br><br><br><br><br><br><br>       
+          <div class="control">
+
+            <label class="radio" id="myDIV">
+              <input type="radio" name="answer">
+              Tweepy Method
+            </label>
+            
+            <label class="radio">
+              <input type="radio" name="answer">
+              Selenium Method
+            </label>
+
+                                  <div id="myDIV">Hover over me.</div>
+
+
+            <div class="hide">I am shown when someone hovers over the div above.</div>
+
+            <br>
+            
+          </div>
+
         </div>
           
         <div class="column is-auto">
-           <p class="title is-2">Area to Display Information</p>
+          <p class="title is-4">Graph of Incentives</p>
+          <object data="/plot.png">
+            <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
+          </object>
         </div>
+      </div>
+
+      <div class="rows" >
+        <div class="row is-auto" style="background:black">asdf
+        </div>
+
       </div>
     </div>  
   </div>

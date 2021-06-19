@@ -1,29 +1,26 @@
-.login-input {
-  width: 130px;
+.radio {
+  padding: 1em; 
 }
 
-.form-button {
-  width: 80px;
-  height: 35px;
+.control {
+  text-align: center;
 }
 
-.signup-box {
-  margin: auto;
-  width: 325px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 10px;
+.hide {
+  display: none;
 }
 
-.settings-box {
-  margin: auto;
-  width: 325px;
+#myDIV:hover + .hide {
+  display: block;
+  color: red;
 }
 
-.signup-area {
-  padding: 30px;
+#body_banner{
+  margin-bottom:35%;
 }
 
-.settings-area {
-  padding: 30px;
+#head_title{
+  margin: 2em;
+  
 }
+
