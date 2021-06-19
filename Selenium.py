@@ -3,9 +3,9 @@ import time
 import csv
 
 tweet = "https://twitter.com/CDCgov/status/1392911350058323973"
+userId = "@"+tweet.split("/")[3]
 
 ## web scraper
-twitter = "@"+tweet.split("/")[3]
 # startTime = time.time()
 chromeOpt = webdriver.ChromeOptions()
 chromeOpt.add_argument("--headless") ## close the UI
@@ -34,7 +34,7 @@ for i in range(len(texts)-1,-1,-1): ## reverse order to prevent out of range
     if texts[i] == "GIF" or texts[i] == "and":
         del texts[i]
     elif texts[i] != "":
-        if texts[i][0] == "#" or (texts[i][0] == "@" and texts[i] != twitter):
+        if texts[i][0] == "#" or (texts[i][0] == "@" and texts[i] != userId):
             del texts[i]
 
 ## find all replies, that are:
@@ -42,7 +42,7 @@ for i in range(len(texts)-1,-1,-1): ## reverse order to prevent out of range
 ## end before the first number (number of replies)
 replies = []
 for j in range(len(texts)):
-    if texts[j] == twitter:
+    if texts[j] == userId:
         untilNum = 1
         reply = ""
         while j+untilNum < len(texts) and texts[j+untilNum].isdigit() == False and texts[j+untilNum] != "" and texts[j+untilNum] != " " and texts[j+untilNum] != "Quote tweet":
