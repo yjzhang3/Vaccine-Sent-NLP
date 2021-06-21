@@ -6,7 +6,7 @@ import io
 import random
 import pandas as pd
 import numpy as np
-from ../reply_wordCloud.py import *
+from reply_wordCloud import *
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from collections import Counter
@@ -28,7 +28,7 @@ color = [
 # -------- Login ------------------------------------------------------------- #
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    df = pd.read_csv("post-repliesNew York.csv")
+    df = pd.read_csv("./csv/post-repliesNew York.csv")
 
     ## grab list of sentiments and calculate range of all
     sentiment_list = df.iloc[:,0].tolist()
@@ -55,22 +55,24 @@ def login():
     pie_labels2 = df.iloc[:,3].dropna().tolist()
     pie_freq2 = df.iloc[:,4].dropna().tolist()
 
+    ## produce the png plot and place inside website
+
     return render_template('login.html', title='Bitcoin Monthly Price in USD', 
     labels=bar_labels, values=bar_values, behav=pie_labels, behav_percent=pie_freq,
     emot = pie_labels2, emot_percent = pie_freq2)
 
-# ======== Main ============================================================== #
-if __name__ == "__main__":
-    app.run(debug=True, use_reloader=True, host="0.0.0.0")
-
 @app.route('/plot.png')
+def create_figure():
+    fig = word_cloud("./csv/repliesNew York.csv")
+    # word_cloud("/csv/repliesNew York.csv") # when we clean up the structure
+    return fig
+
 def plot_png():
     fig = create_figure()
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='image/png')
+    return Response(output.getvalue(), mimetype='image/png')    
 
-def create_figure():
-    word_cloud("../repliesNew York.csv")
-    # word_cloud("/csv/repliesNew York.csv") # when we clean up the structure
-    return fig
+# ======== Main ============================================================== #
+if __name__ == "__main__":
+    app.run(debug=True, use_reloader=True, host="0.0.0.0")

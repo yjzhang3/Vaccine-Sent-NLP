@@ -43,7 +43,7 @@ def word_cloud(csv_file):
     wc = WordCloud(background_color="white", max_words=2000)
     clean_string = ','.join(WORDS)
     wc.generate(clean_string)
-    fig = plt.figure(figsize=(20,20))
+    fig = plt.figure(figsize=(10,10))
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
     plt.show()

@@ -12,3 +12,5 @@ numpy
 matplotlib
 Jinja2
 expertai-nlapi
+wordcloud
+ipython
