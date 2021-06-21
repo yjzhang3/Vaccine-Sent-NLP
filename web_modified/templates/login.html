@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block body %}
+<section class="hero is-white is-medium">
+  <nav class="navbar is-transparent">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="https://static.thenounproject.com/png/1409678-200.png" alt="logo">
+        <h6 href="/" class="subtitle"><strong>NLP Vaccine Analysis</strong></h6>
+      </a>
+    </div> 
+  </nav>
+</section>
+<title>NLP Web App</title>
+<section class="hero is-info is-halfheight">
+  
+  <div class="hero-body" id="body_banner">
+    
+    <div class="container has-text-centered">
+      <div>
+        <p class="subtitle is-4" id="head_title"><i>A web application that applies natural language processing analysis on COVID-19 vaccine incentives</i></p>
+      <div>
+   
+      <div class="rows">
+        <div class="row is-auto" >
+          <div class="dropdown" id="dropdown_1">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span> States </span>
+                <span class="icon is-small">
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a href="#" class="dropdown-item">
+                  California
+                </a>
+                <a class="dropdown-item">
+                  Ohio
+                </a>
+                <a href="#" class="dropdown-item is-active">
+                  Minnesota
+                </a>
+                <a href="#" class="dropdown-item">
+                  West Virginia
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="control">
+
+            <label class="radio" title="More efficient using Tweepy Api">
+              <input type="radio" name="answer" >
+              Tweepy Method
+            </label>
+            
+            <label class="radio" title="Takes longer using Selenium Webscraping">
+              <input type="radio" name="answer" >
+              Selenium Method
+            </label>
+            <br>
+          </div>
+        </div>
+          
+        <div class="row is-auto">
+          <p class="title is-4">Graph of Incentives</p>
+          <object data="/plot.png">
+            <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
+          </object>
+          
+        </di>
+
+        <canvas id="myChart"></canvas>
+
+        <script>
+        const labels = [
+          {% for item in labels %}
+                      "{{ item }}",
+                      {% endfor %}
+        ];
+
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Prices of Bitcoin',
+            backgroundColor: 'DeepSkyBlue',
+            borderColor: 'rgb(0, 255, 255)',
+            borderWidth: 0.5,
+            data: [{% for item in values %}
+                          "{{ item }}",
+                          {% endfor %}],
+
+            
+          }],
+          
+        };
+        </script>
+
+        <div class="row is-auto" style="background:black">asdf
+        </div>
+      </div>
+      
+    </div>  
+  </div>
+</section>
+{% endblock %}
+
+<section class="hero">
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Natural Language Processing</strong> by Team NLP
+          <span class="icon is-small">
+            <i class="fa fa-copyright"></i>
+          </span>2017</a>
+        </p>
+        <p>
+          <a class="icon has-text-primary" href="https://github.com/anfederico" target="_blank">
+            <i class="fa fa-globe"></i>
+          </a>          
+          <a class="icon has-text-primary" href="https://github.com/anfederico" target="_blank">
+            <i class="fa fa-github"></i>
+          </a>
+          <a class="icon has-text-primary" href="mailto:anfederico@github.user" target="_blank">
+            <i class="fa fa-envelope"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</section>
+
+{% block scripts %}
+<script src="../static/js/scripts.js"></script>
+{% endblock %}
