@@ -6,6 +6,7 @@ import io
 import random
 import pandas as pd
 import numpy as np
+from ../reply_wordCloud.py import *
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from collections import Counter
@@ -62,17 +63,14 @@ def login():
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True, host="0.0.0.0")
 
-# @app.route('/plot.png')
-# def plot_png():
-#     fig = create_figure()
-#     output = io.BytesIO()
-#     FigureCanvas(fig).print_png(output)
-#     return Response(output.getvalue(), mimetype='image/png')
+@app.route('/plot.png')
+def plot_png():
+    fig = create_figure()
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
 
-# def create_figure():
-#     fig = Figure()
-#     axis = fig.add_subplot(1, 1, 1)
-#     xs = range(100)
-#     ys = [random.randint(1, 50) for x in xs]
-#     axis.plot(xs, ys)
-#     return fig
+def create_figure():
+    word_cloud("../repliesNew York.csv")
+    # word_cloud("/csv/repliesNew York.csv") # when we clean up the structure
+    return fig
