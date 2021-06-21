@@ -9,8 +9,6 @@ HASH_TAGS = []
 WORDS = []
 
 import os
-os.environ["EAI_USERNAME"] = 'yjzhang3@bu.edu'
-os.environ["EAI_PASSWORD"] = 'w8#BFmUg@A'
 
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()

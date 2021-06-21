@@ -2,10 +2,6 @@ import pandas as pd
 import os
 from csv import reader
 
-# autentification details
-os.environ["EAI_USERNAME"] = 'yjzhang3@bu.edu'
-os.environ["EAI_PASSWORD"] = 'w8#BFmUg@A'
-
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
