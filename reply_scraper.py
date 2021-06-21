@@ -8,10 +8,9 @@ def scraper(tweet,filename):
     ## web scraper
     twitter = "@"+tweet.split("/")[3]
     
-    # startTime = time.time()
     chromeOpt = webdriver.ChromeOptions()
 
-    # chromeOpt.add_argument("--headless") ## close the UI
+    ## close the UI
     driver = webdriver.Chrome(options=chromeOpt)
     heightBS = driver.execute_script("return document.body.scrollHeight") ## height before scroll
     driver.get(tweet)
