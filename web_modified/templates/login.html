@@ -55,61 +55,96 @@
           <canvas id="myChart"></canvas>
 
             <script>
-              const labels = [
-                {% for item in labels %}
-                            "{{ item }}",
-                            {% endfor %}
-              ];
+            var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
 
-              const data = {
-                labels: labels,
-                datasets: [{
-                  label: 'Distribution of Sentiments',
-                  backgroundColor: 'DeepSkyBlue',
-                  borderColor: 'rgb(0, 255, 255)',
-                  borderWidth: 0.5,
-                  data: [{% for item in values %}
-                                "{{ item }}",
-                                {% endfor %}],
-                }],
-                
-              };
+            var labels = [
+              {% for item in labels %}
+                          "{{ item }}",
+                          {% endfor %}
+            ];
+
+            const data = {
+              labels: labels,
+              datasets: [{
+                label: 'Distribution of Sentiments',
+                backgroundColor: 'DeepSkyBlue',
+                borderColor: 'rgb(0, 255, 255)',
+                borderWidth: 0.5,
+                data: [{% for item in values %}
+                              "{{ item }}",
+                              {% endfor %}],
+              }],
+            };
             </script>
           
         </div>
 
         <div class="row is-auto">
-        
+
           <canvas id="myPie"></canvas>
 
             <script>
-              const labels2 = [
-                {% for item in labels %}
-                            "{{ item }}",
-                            {% endfor %}
-              ];
+            var labels2 = [
+              {% for item in behav %}
+                          "{{ item }}",
+                          {% endfor %}
+            ];
 
-              const data2 = {
-                labels: labels2,
-                datasets: [{
-                  label: 'Distribution of Sentiments',
-                  backgroundColor: 'DeepSkyBlue',
-                  borderColor: 'rgb(0, 255, 255)',
-                  borderWidth: 0.5,
-                  data: [{% for item in values %}
-                                "{{ item }}",
-                                {% endfor %}],
-                }],
-                
-              };
+            const data2 = {
+              labels: labels2,
+              datasets: [{
+                label: 'Distribution of Sentiments',
+                backgroundColor: colorArray,
+                borderColor: colorArray,
+                data: [{% for item in behav_percent %}
+                              "{{ item }}",
+                              {% endfor %}],
+              }],
+            };
+
+            
             </script>
-
           
         </div>
 
+          <div class="row is-auto">
+
+          <canvas id="myPie2"></canvas>
+
+          <script>
+            var labels3 = [
+              {% for item in emot %}
+                          "{{ item }}",
+                          {% endfor %}
+            ];
+
+            const data3 = {
+              labels: labels3,
+              datasets: [{
+                label: 'Distribution of Emotions',
+                backgroundColor: colorArray,
+                borderColor: colorArray,
+                data: [{% for item in emot_percent %}
+                              "{{ item }}",
+                              {% endfor %}],
+              }],
+            };
+            
+          </script>
+          
+        </div>
 
         <div class="row is-auto">
-          insert the chart 
+          insert theword art
         </div>
       </div>
       
