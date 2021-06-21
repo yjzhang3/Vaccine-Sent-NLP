@@ -6,21 +6,15 @@
   text-align: center;
 }
 
-.hide {
-  display: none;
-}
-
-#myDIV:hover + .hide {
-  display: block;
-  color: red;
-}
-
 #body_banner{
   margin-bottom:35%;
 }
 
 #head_title{
   margin: 2em;
-  
+}
+
+canvas#chart {
+  margin: 2em;
 }
 

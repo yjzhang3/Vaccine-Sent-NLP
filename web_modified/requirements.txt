@@ -6,3 +6,4 @@ requests
 flask-heroku
 gunicorn
 matplotlib
+jinja2

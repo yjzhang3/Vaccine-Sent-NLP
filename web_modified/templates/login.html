@@ -7,13 +7,11 @@
         <img src="https://static.thenounproject.com/png/1409678-200.png" alt="logo">
         <h6 href="/" class="subtitle"><strong>NLP Vaccine Analysis</strong></h6>
       </a>
-
-    </div>
-    
+    </div> 
   </nav>
 </section>
 <title>NLP Web App</title>
-<section class="hero is-primary is-bold is-halfheight">
+<section class="hero is-info is-halfheight">
   
   <div class="hero-body" id="body_banner">
     
@@ -22,8 +20,8 @@
         <p class="subtitle is-4" id="head_title"><i>A web application that applies natural language processing analysis on COVID-19 vaccine incentives</i></p>
       <div>
    
-      <div class="columns">
-        <div class="column is-auto" >
+      <div class="rows">
+        <div class="row is-auto" >
           <div class="dropdown" id="dropdown_1">
             <div class="dropdown-trigger">
               <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -54,40 +52,57 @@
 
           <div class="control">
 
-            <label class="radio" id="myDIV">
-              <input type="radio" name="answer">
+            <label class="radio" title="More efficient using Tweepy Api">
+              <input type="radio" name="answer" >
               Tweepy Method
             </label>
             
-            <label class="radio">
-              <input type="radio" name="answer">
+            <label class="radio" title="Takes longer using Selenium Webscraping">
+              <input type="radio" name="answer" >
               Selenium Method
             </label>
-
-                                  <div id="myDIV">Hover over me.</div>
-
-
-            <div class="hide">I am shown when someone hovers over the div above.</div>
-
             <br>
-            
           </div>
-
         </div>
           
-        <div class="column is-auto">
+        <div class="row is-auto">
           <p class="title is-4">Graph of Incentives</p>
           <object data="/plot.png">
             <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
           </object>
-        </div>
-      </div>
+          
+        </di>
 
-      <div class="rows" >
+        <canvas id="myChart"></canvas>
+
+        <script>
+        const labels = [
+          {% for item in labels %}
+                      "{{ item }}",
+                      {% endfor %}
+        ];
+
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Prices of Bitcoin',
+            backgroundColor: 'DeepSkyBlue',
+            borderColor: 'rgb(0, 255, 255)',
+            borderWidth: 0.5,
+            data: [{% for item in values %}
+                          "{{ item }}",
+                          {% endfor %}],
+
+            
+          }],
+          
+        };
+        </script>
+
         <div class="row is-auto" style="background:black">asdf
         </div>
-
       </div>
+      
     </div>  
   </div>
 </section>
@@ -118,12 +133,6 @@
     </div>
   </footer>
 </section>
-
-<p class="title is-2">Basic Web</p>
-          <p class="subtitle is-4"><i>Flask Template for Sentiment Analysis</i></p>
-          <p class="subtitle is-5">&#x2022 Analyzes Vaccine Incentive Tweets</p>
-          <p class="subtitle is-5">&#x2022 Perform Sentiment Analysis</p>
-          <p class="subtitle is-5">&#x2022 Measure Public Response</p> 
 
 {% block scripts %}
 <script src="../static/js/scripts.js"></script>
