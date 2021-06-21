@@ -33,7 +33,7 @@
             </div>
             
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content">
+              <div clas s="dropdown-content">
                 <a href="#" class="dropdown-item">
                   California
                 </a>
@@ -49,57 +49,67 @@
               </div>
             </div>
           </div>
-
-          <div class="control">
-
-            <label class="radio" title="More efficient using Tweepy Api">
-              <input type="radio" name="answer" >
-              Tweepy Method
-            </label>
-            
-            <label class="radio" title="Takes longer using Selenium Webscraping">
-              <input type="radio" name="answer" >
-              Selenium Method
-            </label>
-            <br>
-          </div>
-        </div>
           
         <div class="row is-auto">
-          <p class="title is-4">Graph of Incentives</p>
-          <object data="/plot.png">
-            <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
-          </object>
+
+          <canvas id="myChart"></canvas>
+
+            <script>
+              const labels = [
+                {% for item in labels %}
+                            "{{ item }}",
+                            {% endfor %}
+              ];
+
+              const data = {
+                labels: labels,
+                datasets: [{
+                  label: 'Distribution of Sentiments',
+                  backgroundColor: 'DeepSkyBlue',
+                  borderColor: 'rgb(0, 255, 255)',
+                  borderWidth: 0.5,
+                  data: [{% for item in values %}
+                                "{{ item }}",
+                                {% endfor %}],
+                }],
+                
+              };
+            </script>
           
-        </di>
+        </div>
 
-        <canvas id="myChart"></canvas>
+        <div class="row is-auto">
+        
+          <canvas id="myPie"></canvas>
 
-        <script>
-        const labels = [
-          {% for item in labels %}
-                      "{{ item }}",
-                      {% endfor %}
-        ];
+            <script>
+              const labels2 = [
+                {% for item in labels %}
+                            "{{ item }}",
+                            {% endfor %}
+              ];
 
-        const data = {
-          labels: labels,
-          datasets: [{
-            label: 'Prices of Bitcoin',
-            backgroundColor: 'DeepSkyBlue',
-            borderColor: 'rgb(0, 255, 255)',
-            borderWidth: 0.5,
-            data: [{% for item in values %}
-                          "{{ item }}",
-                          {% endfor %}],
+              const data2 = {
+                labels: labels2,
+                datasets: [{
+                  label: 'Distribution of Sentiments',
+                  backgroundColor: 'DeepSkyBlue',
+                  borderColor: 'rgb(0, 255, 255)',
+                  borderWidth: 0.5,
+                  data: [{% for item in values %}
+                                "{{ item }}",
+                                {% endfor %}],
+                }],
+                
+              };
+            </script>
 
-            
-          }],
           
-        };
-        </script>
+        </div>
 
-        <div class="row is-auto" style="background:black">asdf
+
+        <div class="row is-auto">
+          insert the chart 
         </div>
       </div>
       
@@ -133,6 +143,26 @@
     </div>
   </footer>
 </section>
+
+<div class="control">
+
+            <label class="radio" title="More efficient using Tweepy Api">
+              <input type="radio" name="answer" >
+              Tweepy Method
+            </label>
+            
+            <label class="radio" title="Takes longer using Selenium Webscraping">
+              <input type="radio" name="answer" >
+              Selenium Method
+            </label>
+            <br>
+          </div>
+        </div>
+
+<p class="title is-4">Graph of Incentives</p>
+          <object data="/plot.png">
+            <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
+          </object>
 
 {% block scripts %}
 <script src="../static/js/scripts.js"></script>

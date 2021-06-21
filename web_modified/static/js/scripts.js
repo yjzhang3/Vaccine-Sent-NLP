@@ -16,7 +16,7 @@ const config = {
     plugins: {
       title: {
         display: true,
-        text: 'Prices of Bitcoin Over Time',
+        text: 'Distribution of Sentiment',
         color: 'rgba(255, 255, 255, 1)',
         font: {
           size: 40
@@ -34,7 +34,7 @@ const config = {
         },
         title: {
           display: true,
-          text: 'Month',
+          text: 'Sentiment',
           color: 'white',
           font: {
             size: 20,
@@ -54,7 +54,7 @@ const config = {
         },
         title: {
           display: true,
-          text: 'Value',
+          text: 'Frequency',
           color: 'white',
           font: {
             size: 20,
@@ -76,4 +76,74 @@ const config = {
 var myChart = new Chart(
   document.getElementById('myChart'),
   config,
+);
+
+const config_2 = {
+  type: 'bar',
+  data2,
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Composition of Behaviors',
+        color: 'rgba(255, 255, 255, 1)',
+        font: {
+          size: 40
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          fontSize: 15,
+          color: 'rgba(255, 255, 255, 1)',
+          font: {
+            size: 15
+          }
+        },
+        title: {
+          display: true,
+          text: 'Sentiment',
+          color: 'white',
+          font: {
+            size: 20,
+          }
+        },
+        display: true,
+        grid:{
+          color: 'rgba(255, 255, 255, 0.3)',    
+        }
+      },
+      y: {
+        ticks: {
+          color: 'rgba(255, 255, 255, 1)',
+          font: {
+            size: 15
+          }
+        },
+        title: {
+          display: true,
+          text: 'Frequency',
+          color: 'white',
+          font: {
+            size: 20,
+          }
+        },
+        display: true,
+        grid: {
+          color: 'rgba(255, 255, 255, 0.3)',    
+     
+        },
+      },
+      
+    },
+    
+    
+  },
+};
+
+var myChart2 = new Chart(
+  document.getElementById('myPie'),
+  config_2,
 );

@@ -7,3 +7,8 @@ flask-heroku
 gunicorn
 matplotlib
 jinja2
+pandas
+numpy
+matplotlib
+Jinja2
+expertai-nlapi
