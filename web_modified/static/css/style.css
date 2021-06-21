@@ -1,0 +1,20 @@
+.radio {
+  padding: 1em; 
+}
+
+.control {
+  text-align: center;
+}
+
+#body_banner{
+  margin-bottom:35%;
+}
+
+#head_title{
+  margin: 2em;
+}
+
+canvas#chart {
+  margin: 2em;
+}
+
