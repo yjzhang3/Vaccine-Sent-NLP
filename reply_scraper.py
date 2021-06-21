@@ -10,7 +10,7 @@ def scraper(tweet,filename):
     
     chromeOpt = webdriver.ChromeOptions()
 
-    ## close the UI
+    chromeOpt.add_argument("--headless") ## close the UI
     driver = webdriver.Chrome(options=chromeOpt)
     heightBS = driver.execute_script("return document.body.scrollHeight") ## height before scroll
     driver.get(tweet)
@@ -58,9 +58,12 @@ def scraper(tweet,filename):
     for k in range(len(replies)-1,-1,-1):
         if "Privacy policy" in replies[k]:
             del replies[k]
-    del replies[0]
+    if replies != []:
+        del replies[0]
+    else:
+        print("No reply found! Please check your twitter link.")
 
-    with open(filename,"w",encoding='utf8',newline="") as file:
+    with open(filename,"w",encoding='utf-8-sig',newline="") as file:
         write = csv.writer(file)
         # write the header
         for reply in replies:

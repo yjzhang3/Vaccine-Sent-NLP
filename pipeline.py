@@ -5,19 +5,21 @@ from collections import Counter
 from itertools import zip_longest
 import csv
 import pandas as pd
+import os
+import time
 
-# tweet_list = ["https://twitter.com/therecount/status/1392853246725791745",
-#               "https://twitter.com/DE_MisesCaucus/status/1397239498111655947",
-#               "https://twitter.com/GavinNewsom/status/1398025553274277890",
-#               "https://twitter.com/GavinNewsom/status/1398025553274277890",
-#               "https://twitter.com/thehill/status/1400119546078433284",
-#               "https://twitter.com/HawaiiNewsNow/status/1402677284348338177",
-#               "https://twitter.com/HawaiiNewsNow/status/1402677284348338177"]
+tweet_list = ["https://twitter.com/therecount/status/1392853246725791745",
+              "https://twitter.com/DE_MisesCaucus/status/1397239498111655947",
+              "https://twitter.com/GavinNewsom/status/1398025553274277890",
+              "https://twitter.com/nytimes/status/1398028759534551041",
+              "https://twitter.com/thehill/status/1400119546078433284",
+              "https://twitter.com/HawaiiNewsNow/status/1402677284348338177",
+              "https://twitter.com/GovMurphy/status/1389269510612467716"]
 
-# state_name = ["New York","Delaware","California","Ohio","West Virginia","Hawaii","New Jersey"]
+state_name = ["New York","Delaware","California","Ohio","West Virginia","Hawaii","New Jersey"]
 
-tweet_list = ["https://twitter.com/therecount/status/1392853246725791745"]
-state_name = ["New York"]
+# tweet_list = ["https://twitter.com/therecount/status/1392853246725791745"]
+# state_name = ["New York"]
 
 #analyzes sentiment scores, behavioral, and emotional traits
 def post_analysis(t_list, s_list):
@@ -30,7 +32,8 @@ def post_analysis(t_list, s_list):
         #creation of csv files
         f1 = "replies" + state_name[num] + ".csv"
         f2 = "post-replies" + state_name[num] + ".csv"
-        scraper(tweet_list[num],f1) # scrape
+        if need2Scrape(f1):
+            scraper(tweet_list[num],f1) # scrape
         [l1,l2,l3] = Sent(f1) # analysis results
 
         scores = sorted(l1) 
@@ -77,4 +80,8 @@ def post_analysis(t_list, s_list):
 # col_1 = df.iloc[:,0].tolist()
 # print(col_1)
 
-
+def need2Scrape(filename):
+    if os.path.isfile(filename) and time.time()-os.path.getmtime(filename) < 1180800:
+        return False
+    else:
+        return True
