@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.hero{
+  background-color:lightblue;
+}
+
 #body_banner{
   margin-bottom:35%;
 }

@@ -14,7 +14,7 @@
 <title>NLP Web App</title>
 <section class="hero is-halfheight">
   
-  <div class="hero-body" id="body_banner" style="background-color:lightblue">
+  <div class="hero-body" id="body_banner">
     
     <div class="container has-text-centered">
       <div>
@@ -23,154 +23,113 @@
    
       <div class="rows">
         <div class="row is-auto" >
-          <div class="dropdown" id="dropdown_1">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span> States </span>
-                <span class="icon is-small">
-                  <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content">
-                <a href="#" class="dropdown-item">
-                  California
-                </a>
-                <a class="dropdown-item">
-                  Delaware
-                </a>
-                <a href="#" class="dropdown-item is-active">
-                  Hawaii
-                </a>
-                <a href="#" class="dropdown-item">
-                  New Jersey
-                </a>
-                <a href="#" class="dropdown-item">
-                  New York
-                </a>
-                <a href="#" class="dropdown-item">
-                  Ohio
-                </a>
-                <a href="#" class="dropdown-item">
-                  West Virginia
-                </a>
-              </div>
-            </div>
-          </div>
+          <form>
+            <label for="framework">Select a State</label>
+              <select id="framework">
+                  <option value="1">California</option>
+                  <option value="2">Delaware</option>
+                  <option value="3">Hawaii</option>
+                  <option value="4">New Jersey</option>
+                  <option value="5">New York</option>
+                  <option value="6">Ohio</option>
+                  <option value="7">West Virginia</option>
+              </select>
+              <button id="btn">Get the Selected State Analysis</button>
+          </form>
 
-          <script>
-
-          </script>
+        </div>
  
       <div class="cols">  
         <div class="col is-auto">
 
           <canvas id="myChart"></canvas>
 
-            <script>
-              
-
-              var behaviorColorArray = [
-                '#09539D', '#BAEBF7', '#54B4D4', '#FC043C', '#DEAD2F',
-                '#C5868C', '#7FD1C6', '#CB586F', '#D9364A', '#4DF7CC',
-                '#EA7E26', '#FCF4A4', '#04BCDC', '#EFB690', '#DAC423',
-                '#81A7C6', '#5C9C8C', '#A0DCBB', '#064046', '#344CC4'
-              ];
-
-              var emotionColorArray = [
-                '#DF0404', '#D1BD91', '#A105FB', '#E1D18E', '#F9BD14',
-                '#FCDC82', '#EBED0A', '#FCA404', '#FC941C', '#F1D98A',
-                '#F49434', '#FCF1BB', '#E15219', '#FAFA04', '#CA5D9E',
-                '#EF5528', '#ECB59E', '#FCDABB', '#F6DA2A', '#D37451'
-              ];
-
-            var labels = [
-              {% for item in CA[0] %}
-                          "{{ item }}",
-                          {% endfor %}
-            ];
-
-            const data = {
-              labels: labels,
-              datasets: [{
-                label: 'Distribution of Sentiments',
-                backgroundColor: 'DeepSkyBlue',
-                borderColor: 'rgb(0, 255, 255)',
-                borderWidth: 0.5,
-                data: [{% for item in CA[1] %}
-                              "{{ item }}",
-                              {% endfor %}],
-              }],
-            };
-            </script>
-          
         </div>
 
         <div class="col is-auto">
 
           <canvas id="myPie"></canvas>
 
-            <script>
-            var labels2 = [
-              {% for item in CA[2] %}
-                          "{{ item }}",
-                          {% endfor %}
-            ];
-
-            const data2 = {
-              labels: labels2,
-              datasets: [{
-                label: 'Distribution of Sentiments',
-                backgroundColor: behaviorColorArray,
-                borderColor: behaviorColorArray,
-                data: [{% for item in CA[3] %}
-                              "{{ item }}",
-                              {% endfor %}],
-              }],
-            };
-      
-            </script>
-        
-
           <div class="row is-auto">
 
           <canvas id="myPie2"></canvas>
-
-          <script>
-            var labels3 = [
-              {% for item in CA[4] %}
-                          "{{ item }}",
-                          {% endfor %}
-            ];
-
-            const data3 = {
-              labels: labels3,
-              datasets: [{
-                label: 'Distribution of Emotions',
-                backgroundColor: emotionColorArray ,
-                borderColor: emotionColorArray ,
-                data: [{% for item in CA[5] %}
-                              "{{ item }}",
-                              {% endfor %}],
-              }],
-            };
-          </script>
           
         </div>
         <div class="row is-auto">
-          <p class="title is-4">Graph of Incentives</p>
-          <object data="https://github.com/edsun123/ec535_FinalProject/blob/main/pokemoneter/images/eggs/blue_egg_before.png?raw=true">
-            <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
-          </object>
+          <p class="title is-4">Word Art</p>
+          <img src="https://static.thenounproject.com/png/1409678-200.png" id = "WA_img" alt="Word Art">
+          
         </div>
       </div>
       </div>
     </div>  
   </div>
 </section>
-{% endblock %}
+
+<script>
+  const btn = document.querySelector('#btn');
+  const sb = document.querySelector('#framework')
+
+  var flask_variables = [
+    [{{CA[0]|tojson}}, {{CA[1]|tojson}}, {{CA[2]|tojson}}, {{CA[3]|tojson}}, {{CA[4]|tojson}}, {{CA[5]|tojson}}],
+    [{{DE[0]|tojson}}, {{DE[1]|tojson}}, {{DE[2]|tojson}}, {{DE[3]|tojson}}, {{DE[4]|tojson}}, {{DE[5]|tojson}}],
+    [{{HA[0]|tojson}}, {{HA[1]|tojson}}, {{HA[2]|tojson}}, {{HA[3]|tojson}}, {{HA[4]|tojson}}, {{HA[5]|tojson}}],
+    [{{NJ[0]|tojson}}, {{NJ[1]|tojson}}, {{NJ[2]|tojson}}, {{NJ[3]|tojson}}, {{NJ[4]|tojson}}, {{NJ[5]|tojson}}],
+    [{{NY[0]|tojson}}, {{NY[1]|tojson}}, {{NY[2]|tojson}}, {{NY[3]|tojson}}, {{NY[4]|tojson}}, {{NY[5]|tojson}}],
+    [{{OH[0]|tojson}}, {{OH[1]|tojson}}, {{OH[2]|tojson}}, {{OH[3]|tojson}}, {{OH[4]|tojson}}, {{OH[5]|tojson}}],
+    [{{WV[0]|tojson}}, {{WV[1]|tojson}}, {{WV[2]|tojson}}, {{WV[3]|tojson}}, {{WV[4]|tojson}}, {{WV[5]|tojson}}],
+  ];
+
+  var img_link = [
+    "https://github.com/yjzhang3/Vaccine-Sent-NLP/blob/dev_main/img/repliesCalifo.png?raw=true",
+    "https://github.com/yjzhang3/Vaccine-Sent-NLP/blob/dev_main/img/repliesDelawa.png?raw=true",
+    "https://github.com/yjzhang3/Vaccine-Sent-NLP/blob/dev_main/img/repliesHawaii.png?raw=true",
+    "https://github.com/yjzhang3/Vaccine-Sent-NLP/blob/dev_main/img/repliesNew%20Je.png?raw=true",
+    "https://github.com/yjzhang3/Vaccine-Sent-NLP/blob/dev_main/img/repliesNew%20Yo.png?raw=true",
+    "https://github.com/yjzhang3/Vaccine-Sent-NLP/blob/dev_main/img/repliesWest%20V.png?raw=true"
+  ]
+
+  var labels = {{CA[0]|tojson}};
+  var data_values1 = {{CA[1]|tojson}};
+  var labels2 = {{CA[2]|tojson}};
+  var data_values2 = {{CA[3]|tojson}};
+  var labels3 = {{CA[4]|tojson}};
+  var data_values3 = {{CA[5]|tojson}};
+
+  btn.onclick = (event) => {
+      event.preventDefault();
+      var choice = sb.selectedIndex;
+      var img_src = img_link[choice]; 
+
+      document.getElementById('WA_img').src = img_src;
+      
+      myChart.data.labels = flask_variables[choice][0];
+      myChart.data.datasets[0].data = flask_variables[choice][1];
+      myChart2.data.labels = flask_variables[choice][2];
+      myChart2.data.datasets[0].data = flask_variables[choice][3];
+      myChart3.data.labels = flask_variables[choice][4];
+      myChart3.data.datasets[0].data = flask_variables[choice][5];
+
+      myChart.update();
+      myChart2.update();
+      myChart3.update();
+  };
+
+  var behaviorColorArray = [
+    '#09539D', '#BAEBF7', '#54B4D4', '#FC043C', '#DEAD2F',
+    '#C5868C', '#7FD1C6', '#CB586F', '#D9364A', '#4DF7CC',
+    '#EA7E26', '#FCF4A4', '#04BCDC', '#EFB690', '#DAC423',
+    '#81A7C6', '#5C9C8C', '#A0DCBB', '#064046', '#344CC4'
+  ];
+
+  var emotionColorArray = [
+    '#DF0404', '#D1BD91', '#A105FB', '#E1D18E', '#F9BD14',
+    '#FCDC82', '#EBED0A', '#FCA404', '#FC941C', '#F1D98A',
+    '#F49434', '#FCF1BB', '#E15219', '#FAFA04', '#CA5D9E',
+    '#EF5528', '#ECB59E', '#FCDABB', '#F6DA2A', '#D37451'
+  ];
+
+</script>
 
 <section class="hero">
   <footer class="footer">
@@ -180,16 +139,16 @@
           <strong>Natural Language Processing</strong> by Team NLP
           <span class="icon is-small">
             <i class="fa fa-copyright"></i>
-          </span>2017</a>
+          </span>2021</a>
         </p>
         <p>
-          <a class="icon has-text-primary" href="https://github.com/anfederico" target="_blank">
+          <a class="icon has-text-primary" href="https://github.com/yjzhang3/Vaccine-Sent-NLP" target="_blank">
             <i class="fa fa-globe"></i>
-          </a>          
-          <a class="icon has-text-primary" href="https://github.com/anfederico" target="_blank">
+          </a>
+          <a class="icon has-text-primary" href="https://github.com/yjzhang3/Vaccine-Sent-NLP" target="_blank">
             <i class="fa fa-github"></i>
           </a>
-          <a class="icon has-text-primary" href="mailto:anfederico@github.user" target="_blank">
+          <a class="icon has-text-primary" href="mailto:yjzhang3@github.user" target="_blank">
             <i class="fa fa-envelope"></i>
           </a>
         </p>
@@ -198,25 +157,7 @@
   </footer>
 </section>
 
-<div class="control">
-
-            <label class="radio" title="More efficient using Tweepy Api">
-              <input type="radio" name="answer" >
-              Tweepy Method
-            </label>
-            
-            <label class="radio" title="Takes longer using Selenium Webscraping">
-              <input type="radio" name="answer" >
-              Selenium Method
-            </label>
-            <br>
-          </div>
-        </div>
-
-<p class="title is-4">Graph of Incentives</p>
-          <object data="/plot.png">
-            <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
-          </object>
+{% endblock %}
 
 {% block scripts %}
 <script src="../static/js/scripts.js"></script>

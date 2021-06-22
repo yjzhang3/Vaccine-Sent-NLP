@@ -8,23 +8,22 @@ import pandas as pd
 import os
 import time
 
-# tweet_list = ["https://twitter.com/therecount/status/1392853246725791745",
-#               "https://twitter.com/DE_MisesCaucus/status/1397239498111655947",
-#               "https://twitter.com/GavinNewsom/status/1398025553274277890",
-#               "https://twitter.com/nytimes/status/1398028759534551041",
-#               "https://twitter.com/thehill/status/1400119546078433284",
-#               "https://twitter.com/HawaiiNewsNow/status/1402677284348338177",
-#               "https://twitter.com/GovMurphy/status/1389269510612467716"]
+tweet_list = ["https://twitter.com/therecount/status/1392853246725791745",
+              "https://twitter.com/DE_MisesCaucus/status/1397239498111655947",
+              "https://twitter.com/GavinNewsom/status/1398025553274277890",
+              "https://twitter.com/nytimes/status/1398028759534551041",
+              "https://twitter.com/thehill/status/1400119546078433284",
+              "https://twitter.com/HawaiiNewsNow/status/1402677284348338177",
+              "https://twitter.com/GovMurphy/status/1389269510612467716"]
 
-tweet_list = ["https://twitter.com/GovMurphy/status/1389269510612467716"
-             ]
+# tweet_list = ["https://twitter.com/GovMurphy/status/1389269510612467716"]
 
-# state_name = ["New York","Delaware","California","Ohio","West Virginia","Hawaii","New Jersey"]
-state_name = ["New Jersey"]
+state_name = ["New York","Delaware","California","Ohio","West Virginia","Hawaii","New Jersey"]
+# state_name = ["New Jersey"]
 
 
 #analyzes sentiment scores, behavioral, and emotional traits
-def post_analysis(t_list):
+def post_analysis(t_list=tweet_list, s_list=state_name):
 
     results_state_list = []
 
@@ -34,8 +33,8 @@ def post_analysis(t_list):
         #creation of csv files
         f1 = "./csv/replies" + state_name[num] + ".csv"
         f2 = "./csv/post-replies" + state_name[num] + ".csv"
-        # if need2Scrape(f1):
-        scraper(t_list[num],f1) # scrape
+        if need2Scrape(f1):
+            scraper(t_list[num],f1) # scrape
         [l1,l2,l3] = Sent(f1) # analysis results
 
         scores = sorted(l1) 
@@ -79,5 +78,3 @@ def need2Scrape(filename):
         return False
     else:
         return True
-
-post_analysis(tweet_list)

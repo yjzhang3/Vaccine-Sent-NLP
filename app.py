@@ -2,17 +2,11 @@
 
 from re import DEBUG
 from PIL.Image import HAMMING
-from flask import Flask, redirect, url_for, render_template, request, session, Response
-import os
-import io
-import random
+from flask import Flask, render_template, request, session
 from matplotlib.pyplot import bar
 import pandas as pd
 import numpy as np
 from reply_wordCloud import *
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-from collections import Counter
 
 app = Flask(__name__)
 
@@ -25,19 +19,12 @@ def retrieve_list_csv(csv):
     bar_values = [0] * 20
     bar_labels = np.linspace(-100, 100, 21).tolist()
 
-    idx = 0
-    limit = bar_labels[idx+1]
-
+    # print(csv)
+    
     #finding frequency of numbers within a range (range of 20 from -100 to 100)
-    for sentiment in sentiment_list:
-        if sentiment < limit:
-            bar_values[idx]+=1
-
-        else:
-            idx+=1
-            limit = bar_labels[idx]
-
-    print(bar_values)
+    hist = np.histogram(sentiment_list, bins=bar_labels)
+    bar_values = hist[0].tolist()
+                     
     ## grab the behavioral attributes and their frequencies
     pie_labels = df.iloc[:,1].dropna().tolist()
     pie_freq = df.iloc[:,2].dropna().tolist()
@@ -52,6 +39,10 @@ def retrieve_list_csv(csv):
 # -------- Login ------------------------------------------------------------- #
 @app.route('/', methods=['GET', 'POST'])
 def login():
+
+    ##currently false to prevent webscraping in the beginning
+    if False:
+        post_analysis()
 
     CA = []
     DE = []
@@ -69,12 +60,8 @@ def login():
     OH.append(retrieve_list_csv("./csv/post-repliesOhio.csv"))
     WV.append(retrieve_list_csv("./csv/post-repliesWest Virginia.csv"))
     
-    print(CA[0][1])
-    return render_template('login.html', title='Bitcoin Monthly Price in USD', 
-   CA=CA[0], DE= DE[0], HA=HA[0], NJ=NJ[0], NY=NY[0], OH=OH[0], WV=WV[0])
-
-    # labels=bar_labels, values=bar_values, behav=pie_labels, behav_percent=pie_freq,
-    # emot = pie_labels2, emot_percent = pie_freq2
+    return render_template('login.html', title='Sentiment Analysis', 
+    CA=CA[0], DE= DE[0], HA=HA[0], NJ=NJ[0], NY=NY[0], OH=OH[0], WV=WV[0])
 
 # ======== Main ============================================================== #
 if __name__ == "__main__":
