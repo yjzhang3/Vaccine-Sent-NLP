@@ -2,15 +2,13 @@ from selenium import webdriver
 import time
 import csv
 
-#tweet = "https://twitter.com/thehill/status/1400119546078433284"
-
 def scraper(tweet,filename):
     ## web scraper
     twitter = "@"+tweet.split("/")[3]
     
     chromeOpt = webdriver.ChromeOptions()
 
-    chromeOpt.add_argument("--headless") ## close the UI
+    # chromeOpt.add_argument("--headless") ## close the UI
     driver = webdriver.Chrome(options=chromeOpt)
     heightBS = driver.execute_script("return document.body.scrollHeight") ## height before scroll
     driver.get(tweet)

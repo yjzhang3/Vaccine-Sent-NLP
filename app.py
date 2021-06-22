@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from re import DEBUG
+from PIL.Image import HAMMING
 from flask import Flask, redirect, url_for, render_template, request, session, Response
 import os
 import io
 import random
+from matplotlib.pyplot import bar
 import pandas as pd
 import numpy as np
 from reply_wordCloud import *
@@ -12,23 +15,9 @@ from matplotlib.figure import Figure
 from collections import Counter
 
 app = Flask(__name__)
-app.secret_key = os.urandom(12)  # Generic key for dev purposes only
 
-#color array for background 
-color = [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(201, 203, 207, 0.2)'
-    ]
-# ======== Routing =========================================================== #
-# -------- Login ------------------------------------------------------------- #
-@app.route('/', methods=['GET', 'POST'])
-def login():
-    df = pd.read_csv("./csv/post-repliesNew York.csv")
+def retrieve_list_csv(csv):
+    df = pd.read_csv(csv)
 
     ## grab list of sentiments and calculate range of all
     sentiment_list = df.iloc[:,0].tolist()
@@ -43,10 +32,12 @@ def login():
     for sentiment in sentiment_list:
         if sentiment < limit:
             bar_values[idx]+=1
+
         else:
             idx+=1
             limit = bar_labels[idx]
 
+    print(bar_values)
     ## grab the behavioral attributes and their frequencies
     pie_labels = df.iloc[:,1].dropna().tolist()
     pie_freq = df.iloc[:,2].dropna().tolist()
@@ -55,12 +46,36 @@ def login():
     pie_labels2 = df.iloc[:,3].dropna().tolist()
     pie_freq2 = df.iloc[:,4].dropna().tolist()
 
-    ## produce the png plot and place inside website
+    return bar_labels, bar_values, pie_labels, pie_freq, pie_labels2, pie_freq2
 
-    return render_template('login.html', title='Bitcoin Monthly Price in USD', 
-    labels=bar_labels, values=bar_values, behav=pie_labels, behav_percent=pie_freq,
-    emot = pie_labels2, emot_percent = pie_freq2)
+# ======== Routing =========================================================== #
+# -------- Login ------------------------------------------------------------- #
+@app.route('/', methods=['GET', 'POST'])
+def login():
+
+    CA = []
+    DE = []
+    HA = []
+    NJ = []
+    NY = []
+    OH = []
+    WV = []
+
+    CA.append(retrieve_list_csv("./csv/post-repliesCalifornia.csv"))
+    DE.append(retrieve_list_csv("./csv/post-repliesDelaware.csv"))
+    HA.append(retrieve_list_csv("./csv/post-repliesHawaii.csv"))
+    NJ.append(retrieve_list_csv("./csv/post-repliesNew Jersey.csv"))
+    NY.append(retrieve_list_csv("./csv/post-repliesNew York.csv"))
+    OH.append(retrieve_list_csv("./csv/post-repliesOhio.csv"))
+    WV.append(retrieve_list_csv("./csv/post-repliesWest Virginia.csv"))
     
+    print(CA[0][1])
+    return render_template('login.html', title='Bitcoin Monthly Price in USD', 
+   CA=CA[0], DE= DE[0], HA=HA[0], NJ=NJ[0], NY=NY[0], OH=OH[0], WV=WV[0])
+
+    # labels=bar_labels, values=bar_values, behav=pie_labels, behav_percent=pie_freq,
+    # emot = pie_labels2, emot_percent = pie_freq2
+
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True, host="0.0.0.0")

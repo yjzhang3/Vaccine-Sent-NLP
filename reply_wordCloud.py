@@ -8,16 +8,15 @@ from wordcloud import WordCloud, STOPWORDS
 from IPython.display import Image as im
 import pandas as pd
 
-LINKS = []
-WORDS = []
-
-os.environ["EAI_USERNAME"] = 'mynenisp1703@gmail.com'
-os.environ["EAI_PASSWORD"] = 'Ready@hack1'
-
-client = ExpertAiClient()
-language = "en"
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 def word_cloud(csv_file):
+    WORDS = []
+
+    client = ExpertAiClient()
+    language = "en"
+
     df= pd.read_csv(csv_file, names= ["text"], encoding= "UTF-8" )
 
     #removing "\n" in the text
@@ -48,6 +47,3 @@ def word_cloud(csv_file):
     plt.axis("off")
     plt.show()
     return fig
-
-
-#word_cloud("repliesNew York.csv")

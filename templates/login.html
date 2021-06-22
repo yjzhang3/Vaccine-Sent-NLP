@@ -10,6 +10,7 @@
     </div> 
   </nav>
 </section>
+
 <title>NLP Web App</title>
 <section class="hero is-halfheight">
   
@@ -33,15 +34,24 @@
             </div>
             
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div clas s="dropdown-content">
+              <div class="dropdown-content">
                 <a href="#" class="dropdown-item">
                   California
                 </a>
                 <a class="dropdown-item">
-                  Ohio
+                  Delaware
                 </a>
                 <a href="#" class="dropdown-item is-active">
-                  Minnesota
+                  Hawaii
+                </a>
+                <a href="#" class="dropdown-item">
+                  New Jersey
+                </a>
+                <a href="#" class="dropdown-item">
+                  New York
+                </a>
+                <a href="#" class="dropdown-item">
+                  Ohio
                 </a>
                 <a href="#" class="dropdown-item">
                   West Virginia
@@ -49,12 +59,19 @@
               </div>
             </div>
           </div>
-          
-        <div class="row is-auto">
+
+          <script>
+
+          </script>
+ 
+      <div class="cols">  
+        <div class="col is-auto">
 
           <canvas id="myChart"></canvas>
 
             <script>
+              
+
               var behaviorColorArray = [
                 '#09539D', '#BAEBF7', '#54B4D4', '#FC043C', '#DEAD2F',
                 '#C5868C', '#7FD1C6', '#CB586F', '#D9364A', '#4DF7CC',
@@ -70,7 +87,7 @@
               ];
 
             var labels = [
-              {% for item in labels %}
+              {% for item in CA[0] %}
                           "{{ item }}",
                           {% endfor %}
             ];
@@ -82,7 +99,7 @@
                 backgroundColor: 'DeepSkyBlue',
                 borderColor: 'rgb(0, 255, 255)',
                 borderWidth: 0.5,
-                data: [{% for item in values %}
+                data: [{% for item in CA[1] %}
                               "{{ item }}",
                               {% endfor %}],
               }],
@@ -91,13 +108,13 @@
           
         </div>
 
-        <div class="row is-auto">
+        <div class="col is-auto">
 
           <canvas id="myPie"></canvas>
 
             <script>
             var labels2 = [
-              {% for item in behav %}
+              {% for item in CA[2] %}
                           "{{ item }}",
                           {% endfor %}
             ];
@@ -108,15 +125,14 @@
                 label: 'Distribution of Sentiments',
                 backgroundColor: behaviorColorArray,
                 borderColor: behaviorColorArray,
-                data: [{% for item in behav_percent %}
+                data: [{% for item in CA[3] %}
                               "{{ item }}",
                               {% endfor %}],
               }],
             };
       
             </script>
-          
-        </div>
+        
 
           <div class="row is-auto">
 
@@ -124,7 +140,7 @@
 
           <script>
             var labels3 = [
-              {% for item in emot %}
+              {% for item in CA[4] %}
                           "{{ item }}",
                           {% endfor %}
             ];
@@ -135,21 +151,21 @@
                 label: 'Distribution of Emotions',
                 backgroundColor: emotionColorArray ,
                 borderColor: emotionColorArray ,
-                data: [{% for item in emot_percent %}
+                data: [{% for item in CA[5] %}
                               "{{ item }}",
                               {% endfor %}],
               }],
             };
-            
           </script>
           
         </div>
         <div class="row is-auto">
           <p class="title is-4">Graph of Incentives</p>
-          <object data="/plot.png">
+          <object data="https://github.com/edsun123/ec535_FinalProject/blob/main/pokemoneter/images/eggs/blue_egg_before.png?raw=true">
             <img src="https://static.thenounproject.com/png/1409678-200.png" alt="Graph of Incentives">
           </object>
         </div>
+      </div>
       </div>
     </div>  
   </div>
