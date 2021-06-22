@@ -16,8 +16,8 @@ Web Application: flask
 # How to use NLP Vaccine Analysis
 steps to try NLP Vaccine Analysis
 ## To get the website running
-1. mkdir new_folder_git_website
-2. git clone -b testing https://github.com/yjzhang3/Vaccine-Sent-NLP.git
+1. mkdir NLP_webapp
+2. git clone https://github.com/yjzhang3/Vaccine-Sent-NLP.git
 3. pip3 install -r requirements_all.txt
 4. python3 app.py
 
