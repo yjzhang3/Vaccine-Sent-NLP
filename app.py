@@ -60,19 +60,7 @@ def login():
     return render_template('login.html', title='Bitcoin Monthly Price in USD', 
     labels=bar_labels, values=bar_values, behav=pie_labels, behav_percent=pie_freq,
     emot = pie_labels2, emot_percent = pie_freq2)
-
-@app.route('/plot.png')
-def create_figure():
-    fig = word_cloud("./csv/repliesNew York.csv")
-    # word_cloud("/csv/repliesNew York.csv") # when we clean up the structure
-    return fig
-
-def plot_png():
-    fig = create_figure()
-    output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='image/png')    
-
+    
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True, host="0.0.0.0")

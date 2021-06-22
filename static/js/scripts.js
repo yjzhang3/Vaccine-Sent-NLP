@@ -97,7 +97,7 @@ const config2 = {
     plugins: {
       title: {
         display: true,
-        text: 'Composition of Emotions',
+        text: 'Composition of Behaviors',
         color: 'rgba(255, 255, 255, 1)',
         font: {
           size: 40

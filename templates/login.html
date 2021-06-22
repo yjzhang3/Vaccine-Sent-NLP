@@ -11,9 +11,9 @@
   </nav>
 </section>
 <title>NLP Web App</title>
-<section class="hero is-info is-halfheight">
+<section class="hero is-halfheight">
   
-  <div class="hero-body" id="body_banner">
+  <div class="hero-body" id="body_banner" style="background-color:lightblue">
     
     <div class="container has-text-centered">
       <div>
@@ -55,16 +55,19 @@
           <canvas id="myChart"></canvas>
 
             <script>
-            var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
-		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+              var behaviorColorArray = [
+                '#09539D', '#BAEBF7', '#54B4D4', '#FC043C', '#DEAD2F',
+                '#C5868C', '#7FD1C6', '#CB586F', '#D9364A', '#4DF7CC',
+                '#EA7E26', '#FCF4A4', '#04BCDC', '#EFB690', '#DAC423',
+                '#81A7C6', '#5C9C8C', '#A0DCBB', '#064046', '#344CC4'
+              ];
+
+              var emotionColorArray = [
+                '#DF0404', '#D1BD91', '#A105FB', '#E1D18E', '#F9BD14',
+                '#FCDC82', '#EBED0A', '#FCA404', '#FC941C', '#F1D98A',
+                '#F49434', '#FCF1BB', '#E15219', '#FAFA04', '#CA5D9E',
+                '#EF5528', '#ECB59E', '#FCDABB', '#F6DA2A', '#D37451'
+              ];
 
             var labels = [
               {% for item in labels %}
@@ -103,8 +106,8 @@
               labels: labels2,
               datasets: [{
                 label: 'Distribution of Sentiments',
-                backgroundColor: colorArray,
-                borderColor: colorArray,
+                backgroundColor: behaviorColorArray,
+                borderColor: behaviorColorArray,
                 data: [{% for item in behav_percent %}
                               "{{ item }}",
                               {% endfor %}],
@@ -130,8 +133,8 @@
               labels: labels3,
               datasets: [{
                 label: 'Distribution of Emotions',
-                backgroundColor: colorArray,
-                borderColor: colorArray,
+                backgroundColor: emotionColorArray ,
+                borderColor: emotionColorArray ,
                 data: [{% for item in emot_percent %}
                               "{{ item }}",
                               {% endfor %}],
