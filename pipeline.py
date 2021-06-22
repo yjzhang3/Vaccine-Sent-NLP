@@ -30,8 +30,8 @@ def post_analysis(t_list, s_list):
     for num in range(len(t_list)):
         
         #creation of csv files
-        f1 = "replies" + state_name[num] + ".csv"
-        f2 = "post-replies" + state_name[num] + ".csv"
+        f1 = "./csv/replies" + state_name[num] + ".csv"
+        f2 = "./csv/post-replies" + state_name[num] + ".csv"
         if need2Scrape(f1):
             scraper(tweet_list[num],f1) # scrape
         [l1,l2,l3] = Sent(f1) # analysis results
