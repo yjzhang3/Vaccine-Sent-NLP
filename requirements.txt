@@ -1,0 +1,16 @@
+Flask
+WTForms
+SQLAlchemy
+bcrypt
+requests
+flask-heroku
+gunicorn
+matplotlib
+jinja2
+pandas
+numpy
+matplotlib
+Jinja2
+expertai-nlapi
+wordcloud
+ipython

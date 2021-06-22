@@ -1,0 +1,24 @@
+.radio {
+  padding: 1em; 
+}
+
+.control {
+  text-align: center;
+}
+
+.hero{
+  background-color:lightblue;
+}
+
+#body_banner{
+  margin-bottom:35%;
+}
+
+#head_title{
+  margin: 2em;
+}
+
+canvas#chart {
+  margin: 2em;
+}
+
